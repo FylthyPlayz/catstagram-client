@@ -27,6 +27,5 @@ export const Catstagram = () => (
         <Route path="/register">
             <Register />
         </Route>
-
     </>
 )
