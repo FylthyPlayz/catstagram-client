@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react"
-import { useHistory } from 'react-router-dom'
-import { addPost, getTags, addImage } from './PostManager.js'
+import { useHistory, useParams } from 'react-router-dom'
+import { addPost, getTags, addImage, getPostById } from './PostManager.js'
 
 
 export const PostForm = () => {
     const history = useHistory()
     const [tags, setTags] = useState([])
     const [image, setImage] = useState("")
-    // const { postId } = useParams()
+    const { postId } = useParams()
 
 
     const [currentPost, setCurrentPost] = useState({
-        image: null,
+        image: undefined,
         publication_date: "",
         content: "",
         user: 1,
@@ -48,27 +48,29 @@ export const PostForm = () => {
         <form className="postForm">
             <h2 className="postForm__image">Make a new post</h2>
             <fieldset>
-                <div className="form-group">
-                    <input type="file" id="image" onChange={createProfileImageString} />
-                    <label htmlFor="image">Image: </label>
-                    <input type="text" name="image" required autoFocus className="form-control"
-                        value={currentPost.image}
-                        onChange={changePostState}
-                    />
-                </div>
+                <label htmlFor="image">Image: </label>
+                    <div className="form-group">
+                        <input type="file" name="image" onChange={createProfileImageString} 
+                        // value={currentPost.image}
+                        // onChange={changePostState}
+                        />
+                        {/* <button onClick={(evt) => {
+                    // Prevent form from being submitted
+                    evt.preventDefault()
+                    const PostImage = {
+                        Image: image
+                    }
+                    // Send POST request to your API
+                    Promise.all([addImage(PostImage, postId), getPostById(postId)])
+                    .then(setCurrentPost)
+                }}
+                    // Upload the stringified image that is stored in state
+                >Upload</button> */}
+                    </div>
             </fieldset>
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="publication_date">Dat Juicy publication_date: </label>
-                    <input type="text" name="publication_date" required autoFocus className="form-control"
-                        value={currentPost.publication_date}
-                        onChange={changePostState}
-                    />
-                </div>
-            </fieldset> */}
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content">Dat Juicy Content: </label>
+                    <label htmlFor="content">Description: </label>
                     <input type="text" name="content" required autoFocus className="form-control"
                         value={currentPost.content}
                         onChange={changePostState}
@@ -77,8 +79,8 @@ export const PostForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="tag">Tag: </label>
-                    <select name="tag" required autoFocus className="form-control"
+                    <label htmlFor="tags">Tag: </label>
+                    <select name="tags" required autoFocus className="form-control"
                         value={currentPost.tags}
                         onChange={changePostState}>
                         <option value="0">Select a Tag</option>
@@ -99,7 +101,7 @@ export const PostForm = () => {
                     evt.preventDefault()
 
                     const post = {
-                        image: currentPost.image,
+                        image: image,
                         publication_date: currentPost.publication_date,
                         content: currentPost.content,
                         user: currentPost.user,
