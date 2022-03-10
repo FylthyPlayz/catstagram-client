@@ -1,38 +1,24 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from 'react-router-dom'
 import { getPostById, getPosts, deletePost, getTags } from "./PostManager"
-// import Post from "./Post"
-// import { PostSearch } from "./PostSearch"
+
 
 export const PostList = () => {
 
     const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])
-    // const [searchTerm, setSearchTerm] = useState('')
     const history = useHistory()
+
     useEffect(() => {
         getPosts().then(data => setPosts(data))
     }, [])
+    
     useEffect(() => {
         getTags().then(data => setTags(data))
     }, [])
 
-    // Initialization effect hook -> Go get post data
-    // useEffect(() => {
-    //     if (searchTerm.length > 1) {
-    //         getPostById(searchTerm).then((postsData) => setPosts(postsData))
-    //     } else {
-    //         getPosts().then((postsData) => setPosts(postsData))
-    //     }
-    // }, [searchTerm])
-
-    // const onSearchTermChange = (value) => {
-    //     setSearchTerm(value)
-    // }
-
     return (
         <>
-            {/* <PostSearch onSearchTermChange={onSearchTermChange} searchTerm={searchTerm} /> */}
             <div className="table-container" style={{ marginTop: "2rem" }}>
                 <button className="button is-success" onClick={() => history.push("/posts/new")}>
                     New Post
@@ -40,7 +26,14 @@ export const PostList = () => {
                 {
                     posts.map(post => {
                         return <section key={`post--${post.id}`} className="post">
-                            <div className="post__tag">Tag: {post.tag?.label}</div>
+                            <img src={`http://localhost:8000${post.image}`} className="post__image" />
+                            <div className="post__publication_date">Created: {post.publication_date}</div>
+                            <div className="post__content"> Description: {post.content}</div>
+                            <div className="post__tag">Tag: {
+                                tags.map(tag => {
+                                    return tag.label
+                                })
+                            }</div>
                             <div className="post__author">Author: {post.user.user.first_name} {post.user.user.last_name}</div>
                             <button onClick={() => {
                                 history.push({ pathname: `/posts/${post.id}/update` })
