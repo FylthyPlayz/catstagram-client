@@ -111,7 +111,7 @@ export const PostForm = () => {
                     // Send POST request to your API
                     addPost(post)
                         .then(res => res.json())
-                        .then((data) => history.push(`/posts/${data.id}`))
+                        .then(() => history.push(`/posts`))
                 }}
                 className="btn btn-primary">Save Post</button>
         </form>

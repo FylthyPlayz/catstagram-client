@@ -60,6 +60,15 @@ export const getTags = () => {
     }).then(res => res.json())
   }
 
+  export const getTagsById = (id) => {
+    return fetch(`http://localhost:8000/tags/${id}`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("CG_token")}`
+        }
+    })
+        .then(res => res.json())
+}
+
   export const addImage = (image, id) => {
     return fetch(`http://localhost:8000/posts/${id}`, {
         method: "PUT",
