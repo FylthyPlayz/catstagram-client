@@ -23,7 +23,7 @@ export const EditPost = () => {
             image: postData.image,
             publication_date: postData.publication_date,
             content: postData.content,
-            user: postData.user,
+            user: postData.user.id,
             tags: postData.tags
         }))
             .then(getTags().then(data => setTags(data)))
