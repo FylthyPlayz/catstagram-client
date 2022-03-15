@@ -24,13 +24,15 @@ export const deleteCatstagramUser = (user, id) => {
   })
     //   .then(getCatstagramUsers)
 }
-// export const addImage = (image, id) => {
-//   return fetch(`http://localhost:8000/catstagramusers/${id}`, {
-//       method: "PUT",
-//       headers: {
-//           "Authorization": `Token ${localStorage.getItem("CG_token")}`,
-//           "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(image)
-//   })
-// }
+
+export const updateUser = (user, id) => {
+    return fetch(`http://localhost:8000/users/${id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("CG_token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+        
+}

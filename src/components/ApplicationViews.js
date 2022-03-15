@@ -4,6 +4,7 @@ import { EditPost } from "./posts/EditPost.js"
 import { PostDetails } from "./posts/PostDetails.js"
 import { PostForm } from "./posts/PostForm.js"
 import { PostList } from "./posts/PostList.js"
+import { EditUser } from "./users/EditUser.js"
 import { UserProfile } from "./users/UserDetail.js"
 
 export const ApplicationViews = () => {
@@ -27,7 +28,9 @@ export const ApplicationViews = () => {
             <Route exact path="/users/:userId(\d+)">
                 <UserProfile />
             </Route>
-
+            <Route exact path="/users/:userId(\d+)/update">
+                <EditUser/>
+            </Route>
         </main>
     </>
 }
