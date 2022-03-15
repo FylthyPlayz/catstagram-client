@@ -25,7 +25,7 @@ export const EditUser = () => {
             .then(getUserById(userId).then(data => setCurrentUser(data)))
     }, [userId])
 
-    
+
 
     const changeUserState = (domEvent) => {
         domEvent.preventDefault()

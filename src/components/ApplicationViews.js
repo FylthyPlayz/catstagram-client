@@ -29,7 +29,7 @@ export const ApplicationViews = () => {
                 <UserProfile />
             </Route>
             <Route exact path="/users/:userId(\d+)/update">
-                <EditUser/>
+                <EditUser />
             </Route>
         </main>
     </>

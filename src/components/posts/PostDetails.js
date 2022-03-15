@@ -9,7 +9,7 @@ export const PostDetails = () => {
     const [postD, setPostD] = useState({})
     const [tags, setTags] = useState({})
     const { postId } = useParams()
-    const history = useHistory() 
+    const history = useHistory()
 
     useEffect(
         () => {
@@ -17,9 +17,9 @@ export const PostDetails = () => {
         },
         [postId])
 
-        useEffect(() => {
-            getTags().then(data => setTags(data))
-        }, [])
+    useEffect(() => {
+        getTags().then(data => setTags(data))
+    }, [])
 
     return (
         <>
@@ -29,23 +29,23 @@ export const PostDetails = () => {
                 <div className="postD__author">Author: {postD.user?.user.first_name} {postD.user?.user.last_name} {postD.user?.username}</div>
                 <div className="postD__publicationDate">Publication Date: {postD.publication_date}</div>
                 <div className="postD__tag">Tag: {
-                                postD.tags?.map(tag => {
-                                    return tag.label
-                                })
-                            }</div>
-                                 {/* {if (postD.user) === (localStorage.getItem("CG_token"))}  */}
-                            <button onClick={() => {
-                                history.push({ pathname: `/posts/${postD.id}/update` })
-                            }}>
-                                Edit Post
-                            </button>
-                            <button onClick={() => {
-                                // if (confirm('Are you sure you want to delete this post?') == true)
-                                    deletePost(postD, postD.id)
-                                        .then(response => setPostD(response))
-                            }}>
-                                Delete Post
-                            </button>
+                    postD.tags?.map(tag => {
+                        return tag.label
+                    })
+                }</div>
+                {/* {if (postD.user) === (localStorage.getItem("CG_token"))}  */}
+                <button onClick={() => {
+                    history.push({ pathname: `/posts/${postD.id}/update` })
+                }}>
+                    Edit Post
+                </button>
+                <button onClick={() => {
+                    // if (confirm('Are you sure you want to delete this post?') == true)
+                    deletePost(postD, postD.id)
+                        .then(response => setPostD(response))
+                }}>
+                    Delete Post
+                </button>
                 {/* <div className="postD__comments"> Comments: {comments.content}</div> */}
             </section>
             {/* <button className="comments" onClick={() => {

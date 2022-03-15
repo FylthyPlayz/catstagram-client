@@ -28,12 +28,12 @@ export const PostForm = () => {
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(file);
     }
-    
+
     const createProfileImageString = (event) => {
         getBase64(event.target.files[0], (base64ImageString) => {
             console.log("Base64 of file is", base64ImageString);
             // Update a component state variable to the value of base64ImageString  
-    setImage(base64ImageString) 
+            setImage(base64ImageString)
         });
     }
 
@@ -50,10 +50,10 @@ export const PostForm = () => {
             <h2 className="postForm__image">Make a new post</h2>
             <fieldset>
                 <label htmlFor="image">Image: </label>
-                    <div className="form-group">
-                        <input type="file" name="image" onChange={createProfileImageString} 
-                        />
-                    </div>
+                <div className="form-group">
+                    <input type="file" name="image" onChange={createProfileImageString}
+                    />
+                </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
@@ -71,7 +71,7 @@ export const PostForm = () => {
                         value={currentPost.tags}
                         onChange={changePostState}>
                         <option value="0">Select a Tag</option>
-                        {   
+                        {
                             tags.map(tag => (
                                 <option key={tag.id} value={tag.id}>
                                     {tag.label}

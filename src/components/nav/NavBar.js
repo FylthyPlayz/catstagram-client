@@ -7,7 +7,7 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item">
-               <Link className="navbar__link" to="/posts"> Posts</Link>
+                <Link className="navbar__link" to="/posts"> Posts</Link>
             </li>
             {
                 (localStorage.getItem("CG_token") !== null) ?

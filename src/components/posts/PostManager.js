@@ -25,7 +25,7 @@ export const addPost = post => {
         },
         body: JSON.stringify(post)
     })
-        
+
 }
 
 export const updatePost = (post, id) => {
@@ -37,7 +37,7 @@ export const updatePost = (post, id) => {
         },
         body: JSON.stringify(post)
     })
-        
+
 }
 
 export const deletePost = (post, id) => {
@@ -58,9 +58,9 @@ export const getTags = () => {
             'Authorization': `Token ${localStorage.getItem('CG_token')}`
         }
     }).then(res => res.json())
-  }
+}
 
-  export const getTagsById = (id) => {
+export const getTagsById = (id) => {
     return fetch(`http://localhost:8000/tags/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("CG_token")}`
@@ -69,7 +69,7 @@ export const getTags = () => {
         .then(res => res.json())
 }
 
-  export const addImage = (image, id) => {
+export const addImage = (image, id) => {
     return fetch(`http://localhost:8000/posts/${id}`, {
         method: "PUT",
         headers: {
@@ -78,4 +78,4 @@ export const getTags = () => {
         },
         body: JSON.stringify(image)
     })
-  }
+}

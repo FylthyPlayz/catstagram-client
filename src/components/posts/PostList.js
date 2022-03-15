@@ -13,7 +13,7 @@ export const PostList = () => {
     useEffect(() => {
         getPosts().then(data => setPosts(data))
     }, [])
-    
+
     useEffect(() => {
         getTags().then(data => setTags(data))
     }, [])
@@ -32,9 +32,9 @@ export const PostList = () => {
                             <img src={`http://localhost:8000${post.image}`} className="post__image" />
                             <div className="post__publication_date">Created: {post.publication_date}</div>
                             <div className="post__tag">Tag: {post.tags?.map(tag => {
-                                    return tag.label
-                                })}</div>
-                            <div className="post__author"><Link to = {`/users/${post.user.id}`}>Author: {post.user.user.username}</Link></div>
+                                return tag.label
+                            })}</div>
+                            <div className="post__author"><Link to={`/users/${post.user.id}`}>Author: {post.user.user.username}</Link></div>
                         </section>
                     })
                 }

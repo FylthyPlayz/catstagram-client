@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-       <Catstagram />  
+      <Catstagram />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
