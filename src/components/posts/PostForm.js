@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, useParams } from 'react-router-dom'
-import { addPost, getTags, addImage, getPostById } from './PostManager.js'
+import { addPost, getTags } from './PostManager.js'
 
 
 export const PostForm = () => {
@@ -8,6 +8,7 @@ export const PostForm = () => {
     const [tags, setTags] = useState([])
     const [image, setImage] = useState("")
     const { postId } = useParams()
+    const selectedValue = []
 
 
     const [currentPost, setCurrentPost] = useState({
@@ -51,21 +52,7 @@ export const PostForm = () => {
                 <label htmlFor="image">Image: </label>
                     <div className="form-group">
                         <input type="file" name="image" onChange={createProfileImageString} 
-                        // value={currentPost.image}
-                        // onChange={changePostState}
                         />
-                        {/* <button onClick={(evt) => {
-                    // Prevent form from being submitted
-                    evt.preventDefault()
-                    const PostImage = {
-                        Image: image
-                    }
-                    // Send POST request to your API
-                    Promise.all([addImage(PostImage, postId), getPostById(postId)])
-                    .then(setCurrentPost)
-                }}
-                    // Upload the stringified image that is stored in state
-                >Upload</button> */}
                     </div>
             </fieldset>
             <fieldset>
@@ -80,11 +67,11 @@ export const PostForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                    <select name="tags" required autoFocus className="form-control"
+                    <select option="select" name="tags" required autoFocus className="form-control"
                         value={currentPost.tags}
                         onChange={changePostState}>
                         <option value="0">Select a Tag</option>
-                        {
+                        {   
                             tags.map(tag => (
                                 <option key={tag.id} value={tag.id}>
                                     {tag.label}

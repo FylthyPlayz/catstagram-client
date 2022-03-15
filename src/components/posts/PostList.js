@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { useHistory, Link, useParams } from 'react-router-dom'
-import { getUserById } from "../users/UserManager"
-import { getPosts, deletePost, getTags } from "./PostManager"
+import { useHistory, Link } from 'react-router-dom'
+import { getPosts, getTags } from "./PostManager"
 
 
 
@@ -9,7 +8,6 @@ export const PostList = () => {
 
     const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])
-    const [user, setUser] = useState([])
     const history = useHistory()
 
     useEffect(() => {

@@ -9,12 +9,6 @@ export const NavBar = () => {
             <li className="navbar__item">
                <Link className="navbar__link" to="/posts"> Posts</Link>
             </li>
-            {/* <li className="navbar__item">
-            <Link className="navbar__link" to="/users"> Users</Link>
-            </li> */}
-            {/* <li className="navbar__item">
-                Navigation link
-            </li> */}
             {
                 (localStorage.getItem("CG_token") !== null) ?
                     <li className="nav-item">

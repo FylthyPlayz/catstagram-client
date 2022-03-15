@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, useParams } from 'react-router-dom'
-import { updatePost, getTags, addImage, getPostById } from './PostManager.js'
+import { updatePost, getTags, getPostById } from './PostManager.js'
 
 
 export const EditPost = () => {
@@ -61,18 +61,6 @@ export const EditPost = () => {
                         // value={currentPost.image}
                         // onChange={changePostState}
                         />
-                        {/* <button onClick={(evt) => {
-                    // Prevent form from being submitted
-                    evt.preventDefault()
-                    const PostImage = {
-                        Image: image
-                    }
-                    // Send POST request to your API
-                    Promise.all([addImage(PostImage, postId), getPostById(postId)])
-                    .then(setCurrentPost)
-                }}
-                    // Upload the stringified image that is stored in state
-                >Upload</button> */}
                     </div>
             </fieldset>
             <fieldset>
@@ -88,7 +76,7 @@ export const EditPost = () => {
                 <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
                     <select name="tags" required autoFocus className="form-control"
-                        value={currentPost.tags}
+                        value={currentPost.tags.id}
                         onChange={changePostState}>
                         <option value="0">Select a Tag</option>
                         {
