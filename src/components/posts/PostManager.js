@@ -79,3 +79,26 @@ export const addImage = (image, id) => {
         body: JSON.stringify(image)
     })
 }
+
+export const unlikePost = eventId => {
+    return fetch(`http://localhost:8000/posts/${ eventId }/unlike`, {
+        method: "DELETE",
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("CG_token")}`
+        },
+        body: JSON.stringify(eventId)
+    })
+        
+        .then(getPosts)
+    }
+    
+    export const likePost = eventId => {
+    return fetch(`http://localhost:8000/posts/${ eventId }/like`, {
+        method: "POST",
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("CG_token")}`
+        },
+        body: JSON.stringify(eventId)
+    })
+        .then(getPosts)
+    }

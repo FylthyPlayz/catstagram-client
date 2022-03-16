@@ -43,6 +43,7 @@ export const PostDetails = () => {
                     // if (confirm('Are you sure you want to delete this post?') == true)
                     deletePost(postD, postD.id)
                         .then(response => setPostD(response))
+                        .then(history.push({ pathname: `/posts`}))
                 }}>
                     Delete Post
                 </button>

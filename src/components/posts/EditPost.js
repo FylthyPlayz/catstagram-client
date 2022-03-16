@@ -51,6 +51,13 @@ export const EditPost = () => {
         setCurrentPost(copy)
     }
 
+    const changeCheckedState = (domEvent) => {
+        const copy = { ...currentPost }
+        let key = domEvent.target.name
+        copy[key] = domEvent.target.checked
+        setCurrentPost(copy)
+    }
+
     return (
         <form className="postForm">
             <h2 className="postForm__image">Edit your post</h2>
@@ -73,20 +80,17 @@ export const EditPost = () => {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+            <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                    <select name="tags" required autoFocus className="form-control"
-                        value={currentPost.tags.id}
-                        onChange={changePostState}>
-                        <option value="0">Select a Tag</option>
+                        <option value="0">Select Tags for your post</option>
                         {
-                            tags.map(tag => (
-                                <option key={tag.id} value={tag.id}>
+                            tags.map(
+                                (tag) => {
+                                return <div><input onChange={changeCheckedState} type="checkbox" name={tag.label} key={`tag--${tag.id}`} value={currentPost.tags}></input>
                                     {tag.label}
-                                </option>
-                            ))
+                                </div>
+                                })
                         }
-                    </select>
                 </div>
             </fieldset>
 
