@@ -70,7 +70,9 @@ export const EditPost = () => {
             <fieldset>
                 <label htmlFor="image">Image: </label>
                 <div className="form-group">
-                    <input type="file" name="image" value= {postId.image} onChange={createProfileImageString}/>
+                   
+                    <img src={`http://localhost:8000${currentPost.image}`} alt="Big Cat" className="post__image" />
+                    <input type="file" name="image"  onChange={createProfileImageString}/>
                 </div>
             </fieldset>
             <fieldset>
