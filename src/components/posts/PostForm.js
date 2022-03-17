@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { addPost, getTags } from './PostManager.js'
 
 
@@ -7,8 +7,7 @@ export const PostForm = () => {
     const history = useHistory()
     const [tags, setTags] = useState([])
     const [image, setImage] = useState("")
-    const { postId } = useParams()
-    const selectedValue = []
+    const [selectedTags, setSelectedTags] = useState([])
 
 
     const [currentPost, setCurrentPost] = useState({
@@ -38,11 +37,24 @@ export const PostForm = () => {
     }
 
     const changePostState = (domEvent) => {
-        domEvent.preventDefault()
         const copy = { ...currentPost }
-        let key = domEvent.target.name
+        if (domEvent.target.name === "tags") { 
+            if (domEvent.target.checked === true){
+                const copytags = [ ...selectedTags ]
+                copytags.push(parseInt(domEvent.target.value))
+                setSelectedTags(copytags) 
+            }else if (domEvent.target.checked === false){
+                const copytags = [ ...selectedTags ]
+                const tagIndex = copytags.indexOf(parseInt(domEvent.target.value))
+                copytags.splice(tagIndex, 1) 
+                setSelectedTags(copytags)
+            }
+        }
+        else {
+            let key = domEvent.target.name
         copy[key] = domEvent.target.value
         setCurrentPost(copy)
+            }
     }
 
     return (
@@ -67,18 +79,16 @@ export const PostForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                    <select option="select" name="tags" required autoFocus className="form-control"
-                        value={currentPost.tags}
-                        onChange={changePostState}>
-                        <option value="0">Select a Tag</option>
+                        {/* value={currentPost.tags} */}
+                        <option value="0">Select Tags for your post</option>
                         {
-                            tags.map(tag => (
-                                <option key={tag.id} value={tag.id}>
+                            tags.map(
+                                (tag) => {
+                                return <div><input onChange={changePostState} type="checkbox" name="tags" key={`tag--${tag.id}`} value={tag.id}></input>
                                     {tag.label}
-                                </option>
-                            ))
+                                </div>
+                                })
                         }
-                    </select>
                 </div>
             </fieldset>
 
@@ -92,7 +102,7 @@ export const PostForm = () => {
                         publication_date: currentPost.publication_date,
                         content: currentPost.content,
                         user: currentPost.user,
-                        tags: currentPost.tags
+                        tags: selectedTags
                     }
 
                     // Send POST request to your API

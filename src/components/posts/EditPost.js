@@ -11,7 +11,7 @@ export const EditPost = () => {
 
 
     const [currentPost, setCurrentPost] = useState({
-        image: undefined,
+        image: "",
         publication_date: "",
         content: "",
         user: 1,
@@ -24,7 +24,7 @@ export const EditPost = () => {
             publication_date: postData.publication_date,
             content: postData.content,
             user: postData.user.id,
-            tags: postData.tags
+            tags: postData.tags.map(tag => tag.id)
         }))
             .then(getTags().then(data => setTags(data)))
     }, [postId])
@@ -44,12 +44,25 @@ export const EditPost = () => {
     }
 
     const changePostState = (domEvent) => {
-        domEvent.preventDefault()
         const copy = { ...currentPost }
         let key = domEvent.target.name
         copy[key] = domEvent.target.value
         setCurrentPost(copy)
     }
+
+    const changeTagState = (domEvent) => {
+        // const copy = { ...currentPost }
+            if (domEvent.target.checked === true){
+                const copy =  { ...currentPost } 
+                copy.tags.push(parseInt(domEvent.target.value))
+                setCurrentPost(copy) 
+            }else if (domEvent.target.checked === false){
+                const copy = { ...currentPost }
+                const tagIndex = copy.tags.indexOf(parseInt(domEvent.target.value))
+                copy.tags.splice(tagIndex, 1) 
+                setCurrentPost(copy)
+            }
+        }
 
     return (
         <form className="postForm">
@@ -57,36 +70,33 @@ export const EditPost = () => {
             <fieldset>
                 <label htmlFor="image">Image: </label>
                 <div className="form-group">
-                    <input type="file" name="image" onChange={createProfileImageString}
-                    // value={currentPost.image}
-                    // onChange={changePostState}
-                    />
+                   
+                    <img src={`http://localhost:8000${currentPost.image}`} alt="Big Cat" className="post__image" />
+                    <input type="file" name="image"  onChange={createProfileImageString}/>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="content">Description: </label>
-                    <input type="text" name="content" required autoFocus className="form-control"
+                    <input type="text" name="content" key= "content" required autoFocus className="form-control"
                         value={currentPost.content}
                         onChange={changePostState}
                     />
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
+            <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                    <select name="tags" required autoFocus className="form-control"
-                        value={currentPost.tags.id}
-                        onChange={changePostState}>
-                        <option value="0">Select a Tag</option>
+                        <option value="0">Select Tags for your post</option>
                         {
-                            tags.map(tag => (
-                                <option key={tag.id} value={tag.id}>
+                            tags.map(
+                                (tag) => {
+                                return <div><input onChange={changeTagState} type="checkbox" name={tag.label} key={`tag--${tag.id}`} value={tag.id}
+                                    checked = {(currentPost.tags.find(postTag => postTag === tag.id))}></input>
                                     {tag.label}
-                                </option>
-                            ))
+                                </div>
+                                })
                         }
-                    </select>
                 </div>
             </fieldset>
 

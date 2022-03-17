@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useHistory } from "react-router-dom"
-import { getPostById, getTags, deletePost } from "./PostManager"
+import { getPostById, getTags, deletePost, getPosts } from "./PostManager"
 
 
 
@@ -40,9 +40,9 @@ export const PostDetails = () => {
                     Edit Post
                 </button>
                 <button onClick={() => {
-                    // if (confirm('Are you sure you want to delete this post?') == true)
+                    // if (confirm('Are you sure you want to delete this post?') == true) 
                     deletePost(postD, postD.id)
-                        .then(response => setPostD(response))
+                        .then(history.push(`/posts`))
                 }}>
                     Delete Post
                 </button>

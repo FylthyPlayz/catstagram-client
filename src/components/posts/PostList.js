@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from 'react-router-dom'
-import { getPosts, getTags } from "./PostManager"
+import { getPosts, getTags, likePost, unlikePost } from "./PostManager"
 
 
 
@@ -32,9 +32,18 @@ export const PostList = () => {
                             <img src={`http://localhost:8000${post.image}`} className="post__image" />
                             <div className="post__publication_date">Created: {post.publication_date}</div>
                             <div className="post__tag">Tag: {post.tags?.map(tag => {
-                                return tag.label
+                                return tag.label + (" ")
                             })}</div>
                             <div className="post__author"><Link to={`/users/${post.user.id}`}>Author: {post.user.user.username}</Link></div>
+                            {/* {
+                            post.liked ? <button className="btn btn-3" onClick={() => {
+                               unlikePost(post.id)
+                               .then(response => setPosts(response)) 
+                            }}> Un-like </button> : <button className="btn btn-4" onClick={() => {
+                                likePost(post.id)
+                                .then(response => setPosts(response))
+                            }}> Like</button>
+                        } */}
                         </section>
                     })
                 }
