@@ -1,10 +1,26 @@
 .navbar {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
+    flex-direction: row;
+}
+.navbar__link{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
 }
 
 .navbar__item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.logout {
+    display: flex;
+    justify-content: right;
     flex-basis: 20%;
     list-style-type: none;
 }

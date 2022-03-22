@@ -81,7 +81,7 @@ export const addImage = (image, id) => {
 }
 
 export const unlikePost = eventId => {
-    return fetch(`http://localhost:8000/posts/${ eventId }/unlike`, {
+    return fetch(`http://localhost:8000/likes/${eventId}/unlike`, {
         method: "DELETE",
         headers:{
             "Authorization": `Token ${localStorage.getItem("CG_token")}`
@@ -93,7 +93,7 @@ export const unlikePost = eventId => {
     }
     
     export const likePost = eventId => {
-    return fetch(`http://localhost:8000/posts/${ eventId }/like`, {
+    return fetch(`http://localhost:8000/likes/${eventId}/like`, {
         method: "POST",
         headers:{
             "Authorization": `Token ${localStorage.getItem("CG_token")}`
@@ -101,4 +101,32 @@ export const unlikePost = eventId => {
         body: JSON.stringify(eventId)
     })
         .then(getPosts)
+    }
+
+    export const ratePost = ratingId => {
+        return fetch(`http://localhost:8000/ratings/${ratingId}/rate`, {
+            method: "POST",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("CG_token")}`
+            },
+            body: JSON.stringify(ratingId)
+        })
+            .then(getPosts)
+        }
+
+    export const getRatings = () => {
+        return fetch(`http://localhost:8000/ratings`, {
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('CG_token')}`
+            }
+        }).then(res => res.json())
+    }
+    
+    export const getRatingsById = (id) => {
+        return fetch(`http://localhost:8000/ratings/${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("CG_token")}`
+            }
+        })
+            .then(res => res.json())
     }

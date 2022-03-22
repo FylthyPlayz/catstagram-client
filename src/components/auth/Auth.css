@@ -49,10 +49,10 @@ fieldset {
 .form--login {
     background-size: cover;
     background-position-x: center;
-    /* background-image: url('./logo.png'); */
+    background-image: url('./Images/cat-lover-pattern-background-design_53876-100662.webp');
     z-index: 1;
-    min-height: 25rem;
-    min-width: 45rem;
+    min-height: 50rem;
+    min-width: 75rem;
     padding: 0 5rem;
     background-color: hsla(0,0%,100%,0.75);
     background-blend-mode: overlay;

@@ -23,8 +23,9 @@ export const PostDetails = () => {
 
     return (
         <>
+            <form class="box">
             <section className="postD_Id" key={postId}>
-                <div className="postD__content">Content: {postD.content}</div>
+                <div className="postD__content">Description: {postD.content}</div>
                 <img src={`http://localhost:8000${postD.image}`} className="post__image" />
                 <div className="postD__author">Author: {postD.user?.user.first_name} {postD.user?.user.last_name} {postD.user?.username}</div>
                 <div className="postD__publicationDate">Publication Date: {postD.publication_date}</div>
@@ -34,20 +35,21 @@ export const PostDetails = () => {
                     })
                 }</div>
                 {/* {if (postD.user) === (localStorage.getItem("CG_token"))}  */}
-                <button onClick={() => {
+                <button class="button is-primary" onClick={() => {
                     history.push({ pathname: `/posts/${postD.id}/update` })
                 }}>
                     Edit Post
                 </button>
-                <button onClick={() => {
-                    // if (confirm('Are you sure you want to delete this post?') == true) 
+                <button class="button is-danger" onClick={() => {
+                    if (window.confirm('Are you sure you want to delete this post?') == true) 
                     deletePost(postD, postD.id)
                         .then(history.push(`/posts`))
                 }}>
                     Delete Post
                 </button>
-                {/* <div className="postD__comments"> Comments: {comments.content}</div> */}
             </section>
+            </form>
+                {/* <div className="postD__comments"> Comments: {comments.content}</div> */}
             {/* <button className="comments" onClick={() => {
                 history.push({ pathname: `/posts/${postId}/comment` })
                

@@ -1,6 +1,46 @@
 .post {
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+.postD_Id {
+    width: 40em;
+    margin: 7em auto;
+}
+
+.post:hover {
+    animation: jiggle 0.2s;
+    transition: .4s all ease;
+    z-index: 11;
+    box-shadow: 5px 15px 20px rgba(72, 62, 23, 0.4)
+}
+
+
+.card-body {
+   
+    outline-style: solid;
+    border-radius: 90em;
+    height: 40em;
+    outline-width: 1em;
+    
+}
+
+.card-image {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
+    justify-content:center;
+    align-items:center;
+    max-width: 100%;
+    height: auto;
+}
+
+.createPostButton {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    
+}
+
+.table-container{
+    display: flex;
+    flex-direction: column;
 }
