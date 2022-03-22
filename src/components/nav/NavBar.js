@@ -7,7 +7,7 @@ export const NavBar = () => {
     return (
         <ul className="navbar is-fixed-top" role="navigation">
             <li className="navbar-menu">
-                <Link className="navbar__link" to="/posts"> Posts</Link>
+                <Link className="navbar__link" to="/posts"> Home</Link>
             </li>
             {
                 (localStorage.getItem("CG_token") !== null) ?
