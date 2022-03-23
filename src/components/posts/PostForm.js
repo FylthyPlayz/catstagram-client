@@ -38,23 +38,23 @@ export const PostForm = () => {
 
     const changePostState = (domEvent) => {
         const copy = { ...currentPost }
-        if (domEvent.target.name === "tags") { 
-            if (domEvent.target.checked === true){
-                const copytags = [ ...selectedTags ]
+        if (domEvent.target.name === "tags") {
+            if (domEvent.target.checked === true) {
+                const copytags = [...selectedTags]
                 copytags.push(parseInt(domEvent.target.value))
-                setSelectedTags(copytags) 
-            }else if (domEvent.target.checked === false){
-                const copytags = [ ...selectedTags ]
+                setSelectedTags(copytags)
+            } else if (domEvent.target.checked === false) {
+                const copytags = [...selectedTags]
                 const tagIndex = copytags.indexOf(parseInt(domEvent.target.value))
-                copytags.splice(tagIndex, 1) 
+                copytags.splice(tagIndex, 1)
                 setSelectedTags(copytags)
             }
         }
         else {
             let key = domEvent.target.name
-        copy[key] = domEvent.target.value
-        setCurrentPost(copy)
-            }
+            copy[key] = domEvent.target.value
+            setCurrentPost(copy)
+        }
     }
 
     return (
@@ -79,16 +79,16 @@ export const PostForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                        {/* value={currentPost.tags} */}
-                        <option value="0">Select Tags for your post</option>
-                        {
-                            tags.map(
-                                (tag) => {
+                    {/* value={currentPost.tags} */}
+                    <option value="0">Select Tags for your post</option>
+                    {
+                        tags.map(
+                            (tag) => {
                                 return <div><input onChange={changePostState} type="checkbox" name="tags" key={`tag--${tag.id}`} value={tag.id}></input>
                                     {tag.label}
                                 </div>
-                                })
-                        }
+                            })
+                    }
                 </div>
             </fieldset>
 

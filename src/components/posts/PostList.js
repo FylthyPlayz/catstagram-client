@@ -25,19 +25,20 @@ export const PostList = () => {
 
     const changeRatingState = (domEvent) => {
         const copy = { ...ratings }
-        {let key = domEvent.target.name
-        copy[key] = domEvent.target.value
-        setRatings(copy)
-            }
+        {
+            let key = domEvent.target.name
+            copy[key] = domEvent.target.value
+            setRatings(copy)
+        }
     }
 
     return (
         <>
             <div className="table-container" style={{ marginTop: "2rem" }}>
                 <div className="createPostButton">
-                <button class="button is-success" onClick={() => history.push("/posts/new")}>
-                    New Post
-                </button>
+                    <button class="button is-success" onClick={() => history.push("/posts/new")}>
+                        New Post
+                    </button>
                 </div>
                 {
                     posts.map(post => {
@@ -59,7 +60,7 @@ export const PostList = () => {
                                     </div>
                                     <div class="content">
                                         <Link to={`/posts/${post.id}`}> Description: {post.content}</Link>
-                                        
+
                                         <div className="post__publication_date">Created: {post.publication_date}</div>
                                     </div>
                                 </div>
@@ -71,26 +72,26 @@ export const PostList = () => {
                                 }}> Un-like </button> : <button class="btn btn-4" onClick={(event) => {
                                     likePost(post.id)
                                         .then(response => setPosts(response))
-                                        .then(event.target.style.backgroundColor="green")
+                                        .then(event.target.style.backgroundColor = "green")
                                 }}> Like</button>
                             }
                             {
-                               <div className="rating" key="rating">
-                               <label htmlFor="rating">Rating </label>
-                               <select onChange={changeRatingState}>
-                               <option value="0" onClick={() => {
-                                   ratePost(post.id)
-                                   .then(response => setRatings(response))
-                               }}></option>
-                               {
-                                  ratings.map(
-                                      (rate) => {
-                                            return <option value={rate.id}>{rate.rating}</option>
-                                      }
-                                  )
-                               }
-                               </select>
-                               </div> 
+                                <div className="rating" key="rating">
+                                    <label htmlFor="rating">Rating </label>
+                                    <select onChange={changeRatingState}>
+                                        <option value="0" onClick={() => {
+                                            ratePost(post.id)
+                                                .then(response => setRatings(response))
+                                        }}></option>
+                                        {
+                                            ratings.map(
+                                                (rate) => {
+                                                    return <option value={rate.id}>{rate.rating}</option>
+                                                }
+                                            )
+                                        }
+                                    </select>
+                                </div>
                             }
                         </section>
                     })

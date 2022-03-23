@@ -11,14 +11,14 @@ export const NavBar = () => {
             </li>
             {
                 (localStorage.getItem("CG_token") !== null) ?
-                    
-                        <button className="nav-link fakeLink"
-                            onClick={() => {
-                                localStorage.removeItem("CG_token")
-                                history.push({ pathname: "/" })
-                            }}
-                        >Logout</button>
-                     :
+
+                    <button className="nav-link fakeLink"
+                        onClick={() => {
+                            localStorage.removeItem("CG_token")
+                            history.push({ pathname: "/" })
+                        }}
+                    >Logout</button>
+                    :
                     <>
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>

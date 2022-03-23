@@ -52,17 +52,17 @@ export const EditPost = () => {
 
     const changeTagState = (domEvent) => {
         // const copy = { ...currentPost }
-            if (domEvent.target.checked === true){
-                const copy =  { ...currentPost } 
-                copy.tags.push(parseInt(domEvent.target.value))
-                setCurrentPost(copy) 
-            }else if (domEvent.target.checked === false){
-                const copy = { ...currentPost }
-                const tagIndex = copy.tags.indexOf(parseInt(domEvent.target.value))
-                copy.tags.splice(tagIndex, 1) 
-                setCurrentPost(copy)
-            }
+        if (domEvent.target.checked === true) {
+            const copy = { ...currentPost }
+            copy.tags.push(parseInt(domEvent.target.value))
+            setCurrentPost(copy)
+        } else if (domEvent.target.checked === false) {
+            const copy = { ...currentPost }
+            const tagIndex = copy.tags.indexOf(parseInt(domEvent.target.value))
+            copy.tags.splice(tagIndex, 1)
+            setCurrentPost(copy)
         }
+    }
 
     return (
         <form className="postForm">
@@ -70,33 +70,33 @@ export const EditPost = () => {
             <fieldset>
                 <label htmlFor="image">Image: </label>
                 <div className="form-group">
-                   
+
                     <img src={`http://localhost:8000${currentPost.image}`} alt="Big Cat" className="post__image" />
-                    <input type="file" name="image"  onChange={createProfileImageString}/>
+                    <input type="file" name="image" onChange={createProfileImageString} />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="content">Description: </label>
-                    <input type="text" name="content" key= "content" required autoFocus className="form-control"
+                    <input type="text" name="content" key="content" required autoFocus className="form-control"
                         value={currentPost.content}
                         onChange={changePostState}
                     />
                 </div>
             </fieldset>
             <fieldset>
-            <div className="form-group">
+                <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                        <option value="0">Select Tags for your post</option>
-                        {
-                            tags.map(
-                                (tag) => {
+                    <option value="0">Select Tags for your post</option>
+                    {
+                        tags.map(
+                            (tag) => {
                                 return <div><input onChange={changeTagState} type="checkbox" name={tag.label} key={`tag--${tag.id}`} value={tag.id}
-                                    checked = {(currentPost.tags.find(postTag => postTag === tag.id))}></input>
+                                    checked={(currentPost.tags.find(postTag => postTag === tag.id))}></input>
                                     {tag.label}
                                 </div>
-                                })
-                        }
+                            })
+                    }
                 </div>
             </fieldset>
 
