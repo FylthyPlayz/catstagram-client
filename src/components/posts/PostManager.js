@@ -103,6 +103,15 @@ export const likePost = eventId => {
         .then(getPosts)
 }
 
+export const getLikes = () => {
+    return fetch("http://localhost:8000/likes", {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("CG_token")}`
+        }
+    })
+        .then(res => res.json())
+}
+
 export const ratePost = ratingId => {
     return fetch(`http://localhost:8000/ratings/${ratingId}/rate`, {
         method: "POST",
@@ -129,4 +138,12 @@ export const getRatingsById = (id) => {
         }
     })
         .then(res => res.json())
+}
+
+export const getUserRatings = () => {
+    return fetch(`http://localhost:8000/userratings`, {
+        headers: {
+            'Authorization': `Token ${localStorage.getItem('CG_token')}`
+        }
+    }).then(res => res.json())
 }

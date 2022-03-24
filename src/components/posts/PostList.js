@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from 'react-router-dom'
-import { getPosts, getTags, likePost, unlikePost, getRatings, ratePost } from "./PostManager"
+import { getPosts, getTags, likePost, unlikePost, getRatings, ratePost, getLikes, getUserRatings } from "./PostManager"
 import "./Post.css"
 
 
@@ -9,6 +9,8 @@ export const PostList = () => {
     const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])
     const [ratings, setRatings] = useState([])
+    const [userRatings, setUserRatings] = useState([])
+    const [likes, setLikes] = useState([])
     const history = useHistory()
 
     useEffect(() => {
@@ -23,13 +25,25 @@ export const PostList = () => {
         getRatings().then(data => setRatings(data))
     }, [])
 
+    useEffect(() => {
+        getLikes().then(data => setLikes(data))
+    }, [])
+
+    useEffect(() => {
+        getUserRatings().then(data => setUserRatings(data))
+    }, [])
+
+    const [currentRating, setCurrentRating] = useState({
+        user: 1,
+        post: 0,
+        rating: 0
+    })
+
     const changeRatingState = (domEvent) => {
         const copy = { ...ratings }
-        {
-            let key = domEvent.target.name
-            copy[key] = domEvent.target.value
-            setRatings(copy)
-        }
+        let key = domEvent.target.name
+        copy[key] = domEvent.target.value
+        setRatings(copy)
     }
 
     return (
@@ -43,25 +57,29 @@ export const PostList = () => {
                 {
                     posts.map(post => {
                         return <section key={`post--${post.id}`} className="post">
-                            <div class="card">
-                                <div class="card-image is-flex is-align-items-center is-justify-content-center">
-                                    <figure class="is-flex is-align-items-center is-justify-content-center image is-128x128">
-                                        <img src={`http://localhost:8000${post.image}`} alt="cats in various forms" className="card-image" />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="media">
-                                        <div class="media-content">
-                                            <p class="title is-6"><Link to={`/users/${post.user.id}`}>Author: {post.user.user.username}</Link></p>
-                                            <p class="subtitle is-6">Tag: {post.tags?.map(tag => {
-                                                return tag.label + (" ")
-                                            })}</p>
+                            <div class="columns is-centered">
+                                <div class="column is-half">
+                                    <div class="card">
+                                        <div class="card-image is-flex is-align-items-center is-justify-content-center">
+                                            <figure class="is-flex is-align-items-center is-justify-content-center image">
+                                                <img src={`http://localhost:8000${post.image}`} alt="cats in various forms" className="card-image" />
+                                            </figure>
                                         </div>
-                                    </div>
-                                    <div class="content">
-                                        <Link to={`/posts/${post.id}`}> Description: {post.content}</Link>
+                                        <div class="card-content">
+                                            <div class="media">
+                                                <div class="media-content">
+                                                    <p class="title is-6"><Link to={`/users/${post.user.id}`}>Author: {post.user.user.username}</Link></p>
+                                                    <p class="subtitle is-6">Tag: {post.tags?.map(tag => {
+                                                        return tag.label + (" ")
+                                                    })}</p>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <Link to={`/posts/${post.id}`}> Description: {post.content}</Link>
 
-                                        <div className="post__publication_date">Created: {post.publication_date}</div>
+                                                <div className="post__publication_date">Created: {post.publication_date}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -78,15 +96,20 @@ export const PostList = () => {
                             {
                                 <div className="rating" key="rating">
                                     <label htmlFor="rating">Rating </label>
-                                    <select onChange={changeRatingState}>
-                                        <option value="0" onClick={() => {
-                                            ratePost(post.id)
-                                                .then(response => setRatings(response))
-                                        }}></option>
+                                    <select type="submit" onChange={evt => {
+                                        const userRating = {
+                                            user: currentRating.user,
+                                            post: currentRating.post,
+                                            rating: currentRating.rating
+                                        }
+                                        ratePost(userRating)
+                                            .then(setCurrentRating())
+                                    }}>
+                                        <option value="0"></option>
                                         {
                                             ratings.map(
-                                                (rate) => {
-                                                    return <option value={rate.id}>{rate.rating}</option>
+                                                (rating) => {
+                                                    return <option value={rating.id}>{rating.rating}</option>
                                                 }
                                             )
                                         }

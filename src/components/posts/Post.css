@@ -16,21 +16,15 @@
 }
 
 
-.card-body {
-   
-    outline-style: solid;
-    border-radius: 90em;
-    height: 40em;
-    outline-width: 1em;
-    
-}
-
 .card-image {
     display: flex;
     justify-content:center;
     align-items:center;
-    max-width: 100%;
-    height: auto;
+    object-fit: contain;
+}
+
+.image {
+    max-width: 300px;
 }
 
 .createPostButton {
@@ -43,4 +37,9 @@
 .table-container{
     display: flex;
     flex-direction: column;
+}
+
+body {
+    background-color: beige;
+    height: 100%;
 }
