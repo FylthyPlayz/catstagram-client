@@ -7,7 +7,7 @@ export const NavBar = () => {
     return (
         <div class="columns is-centered">
             {/* <div class="column" img src="src/components/nav/bigcat.jpeg"></div> */}
-            <ul className="navbar is-fixed-top" role="navigation" img src="src/components/nav/bigcat.jpeg">
+            <ul className="navbar is-fixed-top" role="navigation">
                 <Link className="navbar__link" to="/posts"> Home</Link>
                 {
                     (localStorage.getItem("CG_token") !== null) ?
