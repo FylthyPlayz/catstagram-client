@@ -36,6 +36,7 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("CG_token", res.token)
+                        // localStorage.setItem("user_id", res.user_id)
                         history.push("/posts")
                     }
                 })
@@ -76,7 +77,7 @@ export const Register = () => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Profile Bio </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other cat fanatics know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"

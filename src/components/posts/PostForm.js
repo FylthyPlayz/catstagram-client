@@ -79,7 +79,6 @@ export const PostForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="tags">Tag: </label>
-                    {/* value={currentPost.tags} */}
                     <option value="0">Select Tags for your post</option>
                     {
                         tags.map(

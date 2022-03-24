@@ -1,10 +1,12 @@
 .navbar {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 .navbar__link{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar__menu {
@@ -18,9 +20,14 @@
     justify-content: center;
 }
 
+.nav-link {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
 .logout {
     display: flex;
-    justify-content: right;
-    flex-basis: 20%;
-    list-style-type: none;
+    justify-content: center;
+    align-items: center;
 }
